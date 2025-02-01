@@ -1,8 +1,10 @@
+import math
+
 algorithm = input()
 match algorithm :
     case "1" :
-        x0 = float(input())
-        tol = float(input())
+        x0 = 1.5
+        tol = 0.000001
         i = 0
         diff = x0
         x = x0
@@ -19,16 +21,13 @@ match algorithm :
 
 
     case "2" :
-        left = float(input())
-        right = float(input())
-        tol = float(input())
-        Max = int(input())
-        terms = int(input())
-        coefficients = []
-        exponents = []
-        for j in range(terms) :
-            coefficients.append(float(input()))
-            exponents.append(float(input()))
+        left = 1
+        right = 2
+        tol = 0.001
+        Max = 10000
+        terms = 3
+        coefficients = [1,4,-10]
+        exponents = [3,2,0]
 
         i = 0
         p = left
@@ -51,58 +50,37 @@ match algorithm :
 
 
     case "3" :
-        p0 = float(input())
-        tol = float(input())
-        n0 = float(input())
-        terms = int(input())
-        coefficients = []
-        exponents = []
-        for j in range(terms) :
-            coefficients.append(float(input()))
-            exponents.append(float(input()))
+        p0 = 1.5
+        tol = 0.000001
+        n0 = 50
+        terms = 4
+        coefficients = [1.0,-1,-4,10]
+        exponents = [1,3,2,0]
 
         i = 0
         while i<n0 :
-            p = 0
+            p = 0.0
             for j in range(terms) : 
                 p += coefficients[j]*pow(p0,exponents[j])
-            if(abs(p-p0)<tol):
+            if abs(p0-p) < tol :
                 print(str(p) + " success")
-                exit()
+                stop()
             i+=i
             p0=p
         print("Failure")
 
 
     case "4" :
-        p0 = float(input())
-        tol = float(input())
-        n0 = int(input())
-        terms = int(input())
-        coefficients = []
-        exponents = []
-        coefficientsD = []
-        exponentsD = []
-        for j in range(terms) :
-            coefficients.append(float(input()))
-            exponents.append(float(input()))
-            if exponents[j] == 0 :
-                coefficientsD.append(0)
-                exponentsD.append(0)
-            else :
-                coefficientsD.append(coefficients[j]*exponents[j])
-                exponentsD.append(exponents[j]-1)
+        p0 = 0.78539816339
+        tol = 0.0000000001
+        n0 = 10
 
         i=0
         while i<n0 :
-            derP = 0
-            for j in range(terms) : 
-                derP += coefficientsD[j]*pow(p0,exponentsD[j])
-            funP = 0
-            for j in range(terms) : 
-                funP += coefficients[j]*pow(p0,exponents[j])
-            if derp!=0 :
-                p = p0-funP/derP
+            derP = (-1*math.sin(p0))-1
+            funP = math.cos(p0)-p0
+            if derP != 0 :
+                p = p0-(funP/derP)
                 if abs(p0-p) < tol :
                     print(str(p) + " success")
                     exit()
